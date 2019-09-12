@@ -44,12 +44,13 @@ function findBandsInTown(bandName){
     axios.get("https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp").then(
         function (response) {
 
-            //console.log(response);
-        
-            console.log("Artist: " + bandName);
-            console.log("\nLocation: " + response.data[0].venue.name);
-            console.log("\nCity: " + response.data[0].venue.city);
-            console.log("\Date & Time: " + response.data[0].datetime);
+
+            console.log("############################################");
+            console.log("\nArtist: " + bandName);  //Display name of band that user input
+            console.log("\nLocation: " + response.data[0].venue.name); // Name of Venue
+            console.log("\nCity: " + response.data[0].venue.city); // Location of Venue
+            console.log("\nDate & Time: " + response.data[0].datetime); //concert date
+            console.log("\n############################################");
             
         }
 );
@@ -74,20 +75,15 @@ function spotifySong(songName)
         if (err) {
           return console.log('Error occurred: ' + err);
         }
-       
-      //console.log(data.tracks.items[0].artists[0].name);
-     
 
+        const fromSpotify = data.tracks.items[0]; //shorthand the JSON inquiry
 
-      //console.log(data.tracks.items);
-      
-       // console.log(data.tracks.items[1]); //*show list of albums
-        console.log(data.tracks.items[0].artists[0].name); //*shows artist
-        console.log(data.tracks.items[0].name); //*name of track found in spotify
-        console.log(data.tracks.items[0].preview_url); //*gives the link to the url
-        console.log(data.tracks.items[0].album.name); //name of the album
-
-
+        console.log("############################################");
+        console.log("\nArtist: " + fromSpotify.artists[0].name); //*shows artist
+        console.log("\nAlbum: " + fromSpotify.album.name); //name of the album
+        console.log("\nTrack: " + fromSpotify.name); //*name of track found in spotify
+        console.log("\nPreview URL: " + fromSpotify.preview_url); //*gives the link to the url
+        console.log("\n############################################");
 
       });
 
@@ -105,8 +101,21 @@ function getMovieInfo(movieName)
 // We then run the request with axios module on a URL with a JSON
 axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
   function(response) {
-    // Then we print out the imdbRating
-    console.log("The movie's rating is: " + response.data.imdbRating);
+
+    const fromOMDb = response.data; //shorthand the JSON inquiry
+
+    console.log("############################################");
+    console.log("\nMovie Title: " + fromOMDb.Title); 
+    console.log("\nRelease Date: " + fromOMDb.Year);   
+    console.log("\nThe movie's rating is: " + fromOMDb.imdbRating); 
+    console.log("\nRotten Tomatoes Rating: " + fromOMDb.Ratings[1].Value);
+    console.log("\nCountry of Origin: " + fromOMDb.Country);
+    console.log("\nLanguage(s): " + fromOMDb.Language);
+    console.log("\nActors: " + fromOMDb.Actors);
+    console.log("\nPlot Summary: " + fromOMDb.Plot);
+    console.log("\n############################################");
+
+
   }
 );
 
