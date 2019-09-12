@@ -49,7 +49,7 @@ function findBandsInTown(bandName){
             console.log("\nArtist: " + bandName);  //Display name of band that user input
             console.log("\nLocation: " + response.data[0].venue.name); // Name of Venue
             console.log("\nCity: " + response.data[0].venue.city); // Location of Venue
-            console.log("\nDate & Time: " + response.data[0].datetime); //concert date
+            console.log("\nDate & Time: " + moment(response.data[0].datetime).format('MMMM Do YYYY, h:mm:ss a')); //concert date
             console.log("\n############################################");
             
         }
