@@ -14,8 +14,8 @@ const fs = require('fs'); //do not npm install...native to javaScript
 
 function startLiri(argument, userQuery){
 
-    console.log(argument);
-    console.log(userQuery);
+    console.log("OK...Let's " + argument);
+    console.log(" for " + userQuery);
 
     switch(argument){
         case "concert-this":
@@ -75,8 +75,20 @@ function spotifySong(songName)
           return console.log('Error occurred: ' + err);
         }
        
-      console.log(data.tracks.items[0].artists[0]); 
+      //console.log(data.tracks.items[0].artists[0].name);
+     
+
+
+      //console.log(data.tracks.items);
       
+       // console.log(data.tracks.items[1]); //*show list of albums
+        console.log(data.tracks.items[0].artists[0].name); //*shows artist
+        console.log(data.tracks.items[0].name); //*name of track found in spotify
+        console.log(data.tracks.items[0].preview_url); //*gives the link to the url
+        console.log(data.tracks.items[0].album.name); //name of the album
+
+
+
       });
 
 
@@ -123,6 +135,6 @@ function pleaseReadLocalFile(){
 
 }
 
-
+//lets start the app with this function
 startLiri(input1, input2);
 
