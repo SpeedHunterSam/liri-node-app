@@ -62,13 +62,13 @@ function findBandsInTown(bandName){
 function spotifySong(songName)
 {
 
-    //spotify JSON for getting top search result for track search from spotify.
 
-    if (songName === ""){
+    if (songName == null ){
         //if no song name is provided the set song name to The Sign
-        songName = "The Sign"
+        songName = "The Sign";
     }
 
+    //spotify JSON for getting top search result for track search from spotify.
 
 
     spotify.search({ type: 'track', query: songName }, function(err, data) {
@@ -96,30 +96,35 @@ function getMovieInfo(movieName)
 {
     //this function calls the OMDb movie API
 
+    if (movieName == null ) {
+        //if no song name is provided the set song name to The Sign
+        movieName = "Mr. Nobody";
+    } 
     
+        // We then run the request with axios module on a URL with a JSON
+        axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
+            function (response) {
 
-// We then run the request with axios module on a URL with a JSON
-axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy").then(
-  function(response) {
+                const fromOMDb = response.data; //shorthand the JSON inquiry
 
-    const fromOMDb = response.data; //shorthand the JSON inquiry
+                console.log("############################################");
+                console.log("\nMovie Title: " + fromOMDb.Title);
+                console.log("\nRelease Date: " + fromOMDb.Year);
+                console.log("\nThe movie's rating is: " + fromOMDb.imdbRating);
+                console.log("\nRotten Tomatoes Rating: " + fromOMDb.Ratings[1].Value);
+                console.log("\nCountry of Origin: " + fromOMDb.Country);
+                console.log("\nLanguage(s): " + fromOMDb.Language);
+                console.log("\nActors: " + fromOMDb.Actors);
+                console.log("\nPlot Summary: " + fromOMDb.Plot);
+                console.log("\n############################################");
+            }
+    
+        
 
-    console.log("############################################");
-    console.log("\nMovie Title: " + fromOMDb.Title); 
-    console.log("\nRelease Date: " + fromOMDb.Year);   
-    console.log("\nThe movie's rating is: " + fromOMDb.imdbRating); 
-    console.log("\nRotten Tomatoes Rating: " + fromOMDb.Ratings[1].Value);
-    console.log("\nCountry of Origin: " + fromOMDb.Country);
-    console.log("\nLanguage(s): " + fromOMDb.Language);
-    console.log("\nActors: " + fromOMDb.Actors);
-    console.log("\nPlot Summary: " + fromOMDb.Plot);
-    console.log("\n############################################");
-
-
-  }
-);
-
+            );
+ 
 }
+
 
 function pleaseReadLocalFile(){
 
