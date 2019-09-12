@@ -1,20 +1,18 @@
-require("dotenv").config();
+require("dotenv").config(); //using dotenv to hide private spotify key
 const keys = require("./keys.js");
 const Spotify = require('node-spotify-api');
 const axios = require("axios");
-
- 
-let spotify = new Spotify(keys.spotify);
- 
+const moment = require("moment");
+const fs = require('fs'); //do not npm install...native to javaScript
 
 
-function startLiri(){
+ let spotify = new Spotify(keys.spotify); //importing private spotify API keys
 
-    //start function that accepts arguments from console
-    let userQuery = "";
+ const input1 = process.argv[2]; //user input argument one
+ const input2 = process.argv[3]; //user input argument two
 
-    const argument = process.argv[2];
-    userQuery = process.argv[3];
+
+function startLiri(argument, userQuery){
 
     console.log(argument);
     console.log(userQuery);
@@ -99,8 +97,26 @@ axios.get("http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=tril
 function pleaseReadLocalFile(){
 
     //this function uses fs node package to read local file
+
+    fs.readFile("random.txt", "utf8", function(error, data){
+
+        if(error){
+            return console.log(error);
+        }
+
+        //test to see if data is being read
+        console.log(data);
+
+        const inFromFile = data.split(",");
+
+        startLiri(inFromFile[0], inFromFile[1]);
+
+
+    })
+
+
 }
 
 
-startLiri();
+startLiri(input1, input2);
 
