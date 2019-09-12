@@ -44,7 +44,13 @@ function findBandsInTown(bandName){
     axios.get("https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp").then(
         function (response) {
 
-            console.log(response);
+            //console.log(response);
+        
+            console.log("Artist: " + bandName);
+            console.log("\nLocation: " + response.data[0].venue.name);
+            console.log("\nCity: " + response.data[0].venue.city);
+            console.log("\Date & Time: " + response.data[0].datetime);
+            
         }
 );
 
